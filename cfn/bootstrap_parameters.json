@@ -1,0 +1,12 @@
+[
+  {
+    "ParameterKey": "StackNumber",
+    "ParameterValue": "0",
+    "UsePreviousValue": false
+  },
+  {
+    "ParameterKey": "LambdaRoleName",
+    "ParameterValue": "pyLambdaTestRole",
+    "UsePreviousValue": false
+  }
+]

@@ -1,0 +1,31 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: An AWS Lambda bootstrap template, a prep for changesets with includes
+Parameters:
+  StackNumber:
+    Type: String
+    Default: "0"
+    Description: "A number used to uniquely name resources across copies of this stack"
+  LambdaRoleName:
+    Description: "Name of the Role attached to the lambda"
+    Type: String
+Resources:
+
+  pyLambdaRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      RoleName: !Ref LambdaRoleName
+
+Outputs:
+  InstanceRole:
+     Description: The Role Created in the bootstrap process
+     Value: !Ref pyLambdaRole
