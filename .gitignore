@@ -110,3 +110,5 @@ build.sh
 parameters.octopus.json
 
 cloudformation.yml
+
+pylambda.zip
