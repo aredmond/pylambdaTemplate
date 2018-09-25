@@ -102,3 +102,11 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Cake build
+build.cake
+build.ps1
+build.sh
+parameters.octopus.json
+
+cloudformation.yml
