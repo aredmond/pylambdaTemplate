@@ -112,3 +112,6 @@ parameters.octopus.json
 cloudformation.yml
 
 pylambda.zip
+
+cfn/
+policies/
