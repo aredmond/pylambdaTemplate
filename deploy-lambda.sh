@@ -20,7 +20,6 @@ FUNCTION_NAME="pylambdaTest"
 RUNTIME="python2.7"
 ROLE_NAME="pylambdaTempRole"
 ROLE_ARN=$(aws iam get-role --role-name $ROLE_NAME | jq -r .Role.Arn)
-#ROLE_ARN="arn:aws:iam::958306274796:role/service-role/testLambdaRole"
 HANDLER_NAME="pylambda.pylambda_handler"
 ZIP_NAME="pylambda.zip"
 TIME_OUT=5
