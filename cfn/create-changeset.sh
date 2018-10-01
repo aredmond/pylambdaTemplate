@@ -20,7 +20,7 @@ do
 done
 
 
-Template_File="cloudformation_changeset_test.yml"
+Template_File="cloudformation.yml"
 
 if [ -z "$STACK_NAME" ]; then
   STACK_NAME="pylambda"
@@ -32,7 +32,7 @@ CHANGE_SET_NAME=${STACK_NAME}-${DATE_STAMP}
 CREATE_FAILED="false"
 
 ## Stored Parameters
-export PARAMETERS_CONTENTS=$(envsubst < bootstrap_parameters.json)
+export PARAMETERS_CONTENTS=$(envsubst < full_parameters.json)
 
 echo "creating changeset $CHANGE_SET_NAME for stack $STACK_NAME..."
 aws cloudformation create-change-set --stack-name $STACK_NAME --change-set-name $CHANGE_SET_NAME --template-body file://$Template_File --parameters "$PARAMETERS_CONTENTS" --capabilities CAPABILITY_NAMED_IAM

@@ -1,0 +1,109 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: An AWS Lambda bootstrap template, a prep for changesets with includes
+Parameters:
+  StackNumber:
+    Type: String
+    Default: "0"
+    Description: "A number used to uniquely name resources across copies of this stack"
+  LambdaRoleName:
+    Description: "Name of the Role attached to the lambda"
+    Type: String
+  FunctionBucket:
+    Description: "Name of the Bucket where the lambda function code is stored"
+    Type: String
+  FunctionBucketFolder:
+    Description: "Name of the Folder under the bucket where the lambda files are stored"
+    Type: String
+  LambdaFileName:
+    Description: "Name of the Role attached to the lambda"
+    Type: String
+  BasicPolicyFileName:
+    Description: "Name of the Basic Policy file"
+    Type: String
+  AccessPolicyFileName:
+    Description: "Name of the Access Policy file"
+    Type: String
+  TrustPolicyFileName:
+    Description: "Name of the Trust Policy file"
+    Type: String
+
+Resources:
+
+  LambdaRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          Parameters:
+            Location:
+              !Join
+                - ''
+                - - 's3://'
+                  - !Ref FunctionBucket
+                  - '/'
+                  - !Ref FunctionBucketFolder
+                  - '/'
+                  - !Ref TrustPolicyFileName
+      # RoleName: !Sub "${LambdaRoleName}-${StackNumber}"
+
+  BasicPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: "Basic Policy allowing the lambda fuction to log its output"
+      Roles:
+        - !Ref LambdaRole
+      PolicyDocument:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          Parameters:
+            Location:
+              !Join
+                - ''
+                - - 's3://'
+                  - !Ref FunctionBucket
+                  - '/'
+                  - !Ref FunctionBucketFolder
+                  - '/'
+                  - !Ref BasicPolicyFileName
+
+  AccessPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: "Access Policy allowing the lambda fuction to interact with AWS resources"
+      Roles:
+        - !Ref LambdaRole
+      PolicyDocument:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          Parameters:
+            Location:
+              !Join
+                - ''
+                - - 's3://'
+                  - !Ref FunctionBucket
+                  - '/'
+                  - !Ref FunctionBucketFolder
+                  - '/'
+                  - !Ref AccessPolicyFileName
+
+  pyLambda:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Handler: "pylambda.pylambda_handler"
+      Role:
+        Fn::GetAtt:
+          - "LambdaRole"
+          - "Arn"
+      Code:
+        S3Bucket: !Ref FunctionBucket
+        S3Key: !Sub "${FunctionBucketFolder}/${LambdaFileName}"
+      Runtime: "python2.7"
+      Timeout: 10
+
+
+Outputs:
+  InstanceRole:
+     Description: The Role Created in the bootstrap process
+     Value: !Ref LambdaRole

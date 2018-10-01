@@ -109,7 +109,7 @@ build.ps1
 build.sh
 parameters.octopus.json
 
-cloudformation.yml
+cloudformation_old.yml
 
 pylambda.zip
 

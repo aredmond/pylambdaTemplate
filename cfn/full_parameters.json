@@ -1,0 +1,42 @@
+[
+  {
+    "ParameterKey": "StackNumber",
+    "ParameterValue": "0",
+    "UsePreviousValue": false
+  },
+  {
+    "ParameterKey": "LambdaRoleName",
+    "ParameterValue": "pyLambdaTestRole",
+    "UsePreviousValue": false
+  },
+  {
+    "ParameterKey": "FunctionBucket",
+    "ParameterValue": "dumpzonehg",
+    "UsePreviousValue": false
+  },
+  {
+    "ParameterKey": "FunctionBucketFolder",
+    "ParameterValue": "pylambda",
+    "UsePreviousValue": false
+  },
+  {
+    "ParameterKey": "BasicPolicyFileName",
+    "ParameterValue": "basic_policy.json",
+    "UsePreviousValue": false
+  },
+  {
+    "ParameterKey": "TrustPolicyFileName",
+    "ParameterValue": "trust_policy.json",
+    "UsePreviousValue": false
+  },
+  {
+    "ParameterKey": "AccessPolicyFileName",
+    "ParameterValue": "access_policy.json",
+    "UsePreviousValue": false
+  },
+  {
+    "ParameterKey": "LambdaFileName",
+    "ParameterValue": "pylambda.zip",
+    "UsePreviousValue": false
+  }
+]

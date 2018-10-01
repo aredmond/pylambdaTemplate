@@ -42,6 +42,6 @@ def pylambda_handler(event, context):
     #     prod_coast='west'
 
     print(get_ipinfo())
-    print("Test")
+    print("ChangeCodeTest")
 
     return True
