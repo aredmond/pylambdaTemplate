@@ -11,7 +11,7 @@ Change some files and update the lambda
 ```
 ./bootstrap.sh update
 ```
-Tare the stack down after deving
+Tear the stack down after deving
 ```
 ./bootstrap.sh delete
 ```
